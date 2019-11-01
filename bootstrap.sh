@@ -9,10 +9,21 @@ function doIt() {
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
 		--exclude "bootstrap.sh" \
+		--exclude "install/"
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
 	source ~/.profile;
+
+	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+		# Linux
+		source install/linux.sh
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+        	# Mac OSX
+		source install/osx.sh
+	else
+		echo "OS not supported"
+	fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
