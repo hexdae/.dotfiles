@@ -12,4 +12,5 @@ brew upgrade
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
-
+# Install all apckages
+brew insyall $(cat $DOTFILES/.packages)
