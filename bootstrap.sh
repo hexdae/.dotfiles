@@ -15,7 +15,7 @@ function doIt() {
 		-avh --no-perms . ~;
 	source ~/.profile;
 
-	if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		# Linux
 		source install/linux.sh
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
