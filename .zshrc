@@ -16,4 +16,7 @@ source $ZSH/oh-my-zsh.sh
 # Source theme configuration
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
+# Source common files
+source ~/.profile
+
 
