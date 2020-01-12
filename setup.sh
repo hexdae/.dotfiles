@@ -18,17 +18,29 @@ function doIt() {
 		echo "OS not supported"
 	fi
 
-	# Sync dotfiles
-	rsync 	--exclude ".git/" \
-		--exclude ".gitignore" \
-                --exclude "install/" \
-                --exclude ".DS_Store" \
-                --exclude ".packages" \
-                --exclude "bootstrap.sh" \
-                --exclude "README.md" \
-                -avh --no-perms . ~;
+	exclude=\
+	( \
+		".install/" \
+		".git/" \
+		".gitignore"\
+		".DS_Store"\
+		".packages"\
+		"bootstrap.sh"\
+		"README.md"\
+       	)
 
-	source ~/.profile;
+	for file in *; do
+    		for (( index = 0; index < ${#exclude[@]}; index++ )); do
+        		if [[ ${file} != ${exclude[${index}]} ]]; then
+				# If the file exists remove it
+				[[if -f ~/${file} ]] && rm ~/${file}
+				# Create a link in the home folder
+				ln -s ${file} ~/${file}
+        		fi
+    		done
+	done
+
+	# Start default shell
 	zsh
 }
 
