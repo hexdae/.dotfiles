@@ -1,4 +1,4 @@
-# Linux installation scripts
+#!/bin/bash
 
 # Install required packages
 sudo apt-get install $(cat $DOTFILES/.packages)

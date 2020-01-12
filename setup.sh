@@ -6,42 +6,22 @@ export DOTFILES=$PWD
 
 git pull origin master;
 
-function doIt() {
+function setup() {
 
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		# Linux
 		source install/linux.sh
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
-        	# Mac OSX
 		source install/osx.sh
 	else
 		echo "OS not supported"
 	fi
 
-	exclude=\
-	( \
-		".install/" \
-		".git/" \
-		".gitignore"\
-		".DS_Store"\
-		".packages"\
-		"bootstrap.sh"\
-		"README.md"\
-       	)
-
-	for file in *; do
-    		for (( index = 0; index < ${#exclude[@]}; index++ )); do
-        		if [[ ${file} != ${exclude[${index}]} ]]; then
-				# If the file exists remove it
-				[[if -f ~/${file} ]] && rm ~/${file}
-				# Create a link in the home folder
-				ln -s ${file} ~/${file}
-        		fi
-    		done
-	done
-
-	# Start default shell
-	zsh
+	for file in .*; do
+	    if [[ ! "$file" =~ .DS_Store$|.git$|.gitignore$ ]]; then
+			# If the file is not a directory create a link	
+			[[ ! -d "$file" ]] && ln -sf "$DOTFILES/$file" "$HOME/$file";
+		fi;
+    done
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -50,7 +30,7 @@ else
 	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		doIt;
+		setup;
+		zsh;
 	fi;
 fi;
-unset doIt;
