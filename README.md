@@ -4,10 +4,8 @@ A repository containing common tools used for development
 
 ### Installation
 
-- Clone into home directory
+- From the home directory
 
 `git clone https://github.com/d-asnaghi/.dotfiles.git && cd .dotfiles && source setup.sh`
 
-- Run installation scripts based on operative system
-`source bootstrap.sh`
-
+- Any update to the files in the home folder will now result in the repo being updated as well
