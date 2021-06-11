@@ -1,3 +1,9 @@
+# Allow for optional local configuration
+if [ -f "$HOME/.localrc" ]
+then
+    source "$HOME/.localrc"
+fi
+
 # If you come from bash you might have to change your $PATH.
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
@@ -8,7 +14,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Plugins
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 # Source Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
@@ -18,5 +24,3 @@ source $ZSH/oh-my-zsh.sh
 
 # Source common files
 source ~/.profile
-
-
