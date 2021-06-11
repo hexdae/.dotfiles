@@ -1,3 +1,3 @@
 # Source common files
-source .aliases
-source .functions
+source ~/.aliases
+source ~/.functions
