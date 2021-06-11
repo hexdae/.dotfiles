@@ -1,11 +1,22 @@
 [user]
 	name = d-asnaghi
 	email = asnaghi@me.com
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+
+[alias]
+	s = "status --porcelain"
+	ca = "commit --amend --no-edit"
+	sp = "stash push --include-untracked"
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[init]
+	defaultBranch = main
