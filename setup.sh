@@ -18,8 +18,13 @@ function setup() {
 
 	for file in .*; do
 	    if [[ ! "$file" =~ .DS_Store$|.git$|.gitignore$ ]]; then
-			# If the file is not a directory create a link	
-			[[ ! -d "$file" ]] && ln -sf "$DOTFILES/$file" "$HOME/$file";
+			# If the file is not a directory create a link
+			if [[ ! -d "$file" ]]; then
+				# Backup the file if it is present
+				[[ -f "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/$file.backup"
+				# Create a symlink to the .dotfile in this folder
+				ln -sf "$DOTFILES/$file" "$HOME/$file";
+			fi;
 		fi;
     done
 }
@@ -27,7 +32,7 @@ function setup() {
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
 else
-	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+	read -p "This may rename existing files in your home directory. Are you sure? (y/n) " -n 1;
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		setup;
