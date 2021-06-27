@@ -12,11 +12,15 @@
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 
+[fetch]
+    prune = true
+
 [alias]
 	s = "status --porcelain"
 	ca = "commit --amend --no-edit"
 	sp = "stash push --include-untracked"
-	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	logline = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	gone = "! git branch -vv | grep ': gone]' |  grep -v "\\*" | awk '{ print $1; }'"
 
 [init]
 	defaultBranch = main
