@@ -21,6 +21,7 @@
 	sp = "stash push --include-untracked"
 	logline = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 	gone = "! git branch -vv | grep ': gone]' |  grep -v "\\*" | awk '{ print $1; }'"
+	local = "! git branch -vv | grep -v '\\[origin' | awk '{ print $1; }'"
 
 [init]
 	defaultBranch = main
