@@ -1,5 +1,5 @@
 
-# Functions
+# Base change
 b64() { echo $1 | base64 --decode }
 base() {
   local base="${1}";
@@ -12,3 +12,7 @@ base() {
 dec() { base 10 $1 }
 hex() { base 16 $1 }
 bin() { base 2 $1 }
+
+# Remote workflow
+diff-push() { ssh $1 "cd $2 && echo '$(git diff $3)' | git apply" }
+diff-pull() { ssh $1 "cd $2 && git diff $3" | git apply }
