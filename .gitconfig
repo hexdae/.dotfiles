@@ -19,9 +19,11 @@
 	s = "status --porcelain"
 	ca = "commit --amend --no-edit"
 	sp = "stash push --include-untracked"
-	logline = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	fix = "commit --amend --no-verify"
 	gone = "! git branch -vv | grep ': gone]' |  grep -v "\\*" | awk '{ print $1; }'"
-	local = "! git branch -vv | grep -v '\\[origin' | awk '{ print $1; }'"
+	local = "! git branch -vv | grep -v "$(git remote)" | awk '{ print $1; }'"
+	logline = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	tracked = "! git branch -vv | grep "$(git remote)" | awk '{ print $1; }'"
 
 [init]
 	defaultBranch = main
