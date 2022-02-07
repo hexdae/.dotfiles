@@ -14,7 +14,7 @@ do
     if [[ $? != 0 ]] ; then
         brew install $package;
     else
-        echo "$package already installed"
+        echo "[INFO] $package already installed"
     fi
 done
 
@@ -23,7 +23,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]
 then
     sh -c "$(curl -fsSLhttps://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 else
-    echo "oh-my-zsh already installed"
+    echo "[INFO] oh-my-zsh already installed"
 fi
 
 # Install powerlevel10k zheme
@@ -31,7 +31,7 @@ if [ ! -d "${ZSH:-$HOME/.oh-my-zsh}/themes/powerlevel10k" ]
 then
     git clone https://github.com/romkatv/powerlevel10k.git "${ZSH:-$HOME/.oh-my-zsh}/themes/powerlevel10k"
 else
-    echo "powerlevel-10k already installed"
+    echo "[INFO] powerlevel-10k already installed"
 fi
 
 # Install zsh-autosuggestions
@@ -39,6 +39,6 @@ if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]
 then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
-    echo "zsh-autosuggestions already installed"
+    echo "[INFO] zsh-autosuggestions already installed"
 fi
 
