@@ -43,3 +43,9 @@ set showmatch
 
 " highlight current line
 set cursorline
+
+"""""""""""""""""""""""""""""""""""""
+" Colorscheme
+"""""""""""""""""""""""""""""""""""""
+syntax on 
+colorscheme monokai 

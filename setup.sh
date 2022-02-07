@@ -18,13 +18,10 @@ function setup() {
 
 	for file in .*; do
 	    if [[ ! "$file" =~ .DS_Store$|.git$|.gitignore$ ]]; then
-			# If the file is not a directory create a link
-			if [[ ! -d "$file" ]]; then
 				# Backup the file if it is present
 				[[ -f "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/$file.backup"
 				# Create a symlink to the .dotfile in this folder
 				ln -sf "$DOTFILES/$file" "$HOME/$file";
-			fi;
 		fi;
     done
 }
