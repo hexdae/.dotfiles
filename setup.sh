@@ -16,12 +16,15 @@ function setup() {
 		echo "OS not supported"
 	fi
 
-	for file in .*; do
-	    if [[ ! "$file" =~ .DS_Store$|.git$|.gitignore$ ]]; then
+	for dotfile in .*; do
+	    if [[ ! "$dotfile" =~ .DS_Store$|.git$|.gitignore$|^.$|^..$ ]]; then
 				# Backup the file if it is present
-				[[ -f "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/$file.backup"
+				if [[ -f "$HOME/$dotfile" ]] || [[ -d "$HOME"/$dotfile ]] ;then
+          echo "[INFO] backed up old $dotfile"
+          mv "$HOME/$dotfile" "$HOME/$dotfile.backup"
+        fi 
 				# Create a symlink to the .dotfile in this folder
-				ln -sf "$DOTFILES/$file" "$HOME/$file";
+				ln -sf "$DOTFILES/$dotfile" "$HOME/$dotfile";
 		fi;
     done
 }
