@@ -21,7 +21,7 @@ done
 # Install Oh-My-Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
-    sh -c "$(curl -fsSLhttps://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 else
     echo "[INFO] oh-my-zsh already installed"
 fi
