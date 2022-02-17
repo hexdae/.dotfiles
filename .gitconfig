@@ -29,3 +29,5 @@
 	defaultBranch = main
 [core]
 	excludesFile = ~/.gitignore
+[pull]
+	ff = only
