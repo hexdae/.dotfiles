@@ -47,5 +47,33 @@ set cursorline
 """""""""""""""""""""""""""""""""""""
 " Colorscheme
 """""""""""""""""""""""""""""""""""""
-syntax on 
-colorscheme monokai 
+syntax on
+colorscheme gruvbox
+
+"""""""""""""""""""""""""""""""""""""
+" Dark mode swtch
+"""""""""""""""""""""""""""""""""""""
+function! SetBackgroundMode(...)
+    let s:new_bg = 'light'
+    if $TERM_PROGRAM ==? 'Apple_Terminal'
+        let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+        if s:mode ==? 'dark'
+            let s:new_bg = 'dark'
+        else
+            let s:new_bg = 'light'
+        endif
+    else
+        " This is for Linux where I use an environment variable for this:
+        if $VIM_BACKGROUND ==? 'dark'
+            let s:new_bg = 'dark'
+        else
+            let s:new_bg = 'light'
+        endif
+    endif
+    if &background !=? s:new_bg
+        let &background = s:new_bg
+    endif
+endfunction
+call SetBackgroundMode()
+"call timer_start(3000, 'SetBackgroundMode', {'repeat': -1})
+
