@@ -1,6 +1,5 @@
 
 # Base change
-b64() { echo $1 | base64 --decode }
 base() {
   local base="${1}";
   local num="$(echo ${2} | sed -e "s/^0x//" | tr '[:lower:]' '[:upper:]')"
@@ -9,10 +8,15 @@ base() {
   echo "dec: $(echo "obase=10; ibase=${base}; ${num}" | bc)"
   echo "hex: 0x$(echo "obase=16; ibase=${base}; ${num}" | bc)"
 }
-dec() { base 10 $1 }
-hex() { base 16 $1 }
-bin() { base 2 $1 }
+dec() { base 10 $1; }
+hex() { base 16 $1; }
+bin() { base 2 $1; }
 
 # Remote workflow
-diff-push() { ssh $1 "cd $2 && echo '$(git diff $3)' | git apply" }
-diff-pull() { ssh $1 "cd $2 && git diff $3" | git apply }
+diff-push() { ssh $1 "cd $2 && echo '$(git diff $3)' | git apply"; }
+diff-pull() { ssh $1 "cd $2 && git diff $3" | git apply; }
+watch-sync() { fswatch $1 -o -r | xargs -n1 -I{} rsync -av $1 $2; }
+
+# Utilities
+b64() { echo $1 | base64 --decode }
+h() { local line="${2:-1}p"; history 0 | cut -c 8- | rg -v "h " | rg $1 | tac | sed -n $line; }
