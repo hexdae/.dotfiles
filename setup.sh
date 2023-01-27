@@ -17,12 +17,12 @@ function setup() {
 	fi
 
 	for dotfile in .*; do
-	    if [[ ! "$dotfile" =~ .DS_Store$|.git$|.gitignore$|^.$|^..$ ]]; then
+	    if [[ ! "$dotfile" =~ .DS_Store$|.git$|^.$|^..$ ]]; then
 				# Backup the file if it is present
 				if [[ -f "$HOME/$dotfile" ]] || [[ -d "$HOME"/$dotfile ]] ;then
           echo "[INFO] backed up old $dotfile"
           mv "$HOME/$dotfile" "$HOME/$dotfile.backup"
-        fi 
+        fi
 				# Create a symlink to the .dotfile in this folder
 				ln -sf "$DOTFILES/$dotfile" "$HOME/$dotfile";
 		fi;
