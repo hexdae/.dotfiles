@@ -20,4 +20,9 @@ font:
 
 window:
   opacity: 0.92
-  decorations: "Transparent"
+  decorations: "transparent"
+  padding:
+   x: 15
+   y: 20
+
+
