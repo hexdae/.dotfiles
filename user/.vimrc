@@ -48,9 +48,9 @@ set cursorline
 " Colorscheme
 """""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme gruvbox
 
-"""""""""""""""""""""""""""""""""""""
-" Dark mode
-"""""""""""""""""""""""""""""""""""""
-set background=dark
+
+call plug#begin()
+  Plug 'preservim/NERDTree'
+  let NERDTreeShowHidden=1
+call plug#end()
