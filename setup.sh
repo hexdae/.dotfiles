@@ -1,36 +1,37 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")" || exit 1;
+set -eu pipefail
 
-export DOTFILES=$PWD
-
-git pull origin master;
+DOTFILES=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 function setup() {
 
     # Install homebrew if needed
-    which -s brew
+    which brew > /dev/null
     if [[ $? != 0 ]] ; then
-        # Install Homebrew
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 
     # Install all packages
-    brew bundle install --file brew/Brewfile
+    brew bundle install --file "$DOTFILES/brew/Brewfile"
 
-    for USER_FILE in user/.*; do
+    for USER_FILE in "$DOTFILES"/user/.*; do
+
         local DOTFILE="$(basename $USER_FILE)"
+
         if [[ ! "$DOTFILE" =~ .DS_Store$|.git$|^.$|^..$ ]]; then
             # Backup the file if it is present
             if [[ -f "$HOME/$DOTFILE" ]] || [[ -d "$HOME"/$DOTFILE ]] ;then
-                # Discard previous backups if they were there
-                [[ -f "$HOME/$DOTFILE.backup" ]] || [[ -d "$HOME/$DOTFILE.backup" ]] && rm "$HOME/$DOTFILE.backup"
+                # Remove backup symlink directories to avoid duplication
+                [[ -d "$HOME/$DOTFILE.backup" ]] && rm "$HOME/$DOTFILE.backup"
                 # Copy the current file to its backup
                 echo "[INFO] backing up original $DOTFILE"
                 mv "$HOME/$DOTFILE" "$HOME/$DOTFILE.backup"
             fi
+
             # Create a symlink to the .dotfile in this folder
-            ln -snf "$DOTFILES/$USER_FILE" "$HOME/$DOTFILE";
+            ln -snf "$USER_FILE" "$HOME/$DOTFILE";
+
         fi;
     done
 
