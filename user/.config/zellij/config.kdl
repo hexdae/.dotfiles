@@ -1,2 +1,3 @@
 theme "vitesse"
 mouse_mode true
+default_layout "compact"
