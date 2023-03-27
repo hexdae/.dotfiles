@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
 export DOTFILES=$PWD
 
@@ -16,18 +16,7 @@ function setup() {
     fi
 
     # Install all packages
-    for package in $(cat $DOTFILES/install/packages);
-    do
-        which -s $package
-        if [[ $? != 0 ]] ; then
-            brew install $package;
-        else
-            echo "[INFO] $package already installed"
-        fi
-    done
-
-    # Install hack font
-    brew install --cask font-hack
+    pushd brew > /dev/null && brew bundle install && popd > /dev/null || exit 1
 
     pushd user > /dev/null || exit 1
 
@@ -45,7 +34,7 @@ function setup() {
         fi;
     done
 
-    popd || exit 1
+    popd > /dev/null || exit 1
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

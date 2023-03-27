@@ -1,0 +1,8 @@
+brew "zsh"
+brew "wget"
+brew "nvim"
+brew "zellij"
+brew "starship"
+
+cask "alacritty"
+cask "font-hack"
