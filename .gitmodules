@@ -1,4 +1,4 @@
-[submodule "user/.zsh/zsh-autosuggestions"]
+[submodule "user/.zsh/plugins/zsh-autosuggestions"]
 	path = user/.zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "user/.zsh/oh-my-zsh"]
