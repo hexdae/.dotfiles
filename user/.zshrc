@@ -7,9 +7,13 @@ fi
 # Prompt
 source <($(which starship) init zsh --print-full-init)
 
-# Plugins
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh management
+export ZSH="$HOME/.zsh/oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.zsh"
+plugins=(git zsh-autosuggestions)
+source $ZSH/oh-my-zsh.sh
 
 # Source common files
 source ~/.profile
+
 
