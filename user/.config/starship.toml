@@ -1,7 +1,7 @@
 [git_status]
-modified = '!${count}(green)'
-deleted = '✘${count}'
-staged = '+${count}(green)'
+modified = '[!${count}](bold yellow)'
+deleted = '[✘${count}](bold red)'
+staged = '[+${count}(green)](bold green)'
 ahead = '⇡${count}'
 behind = '⇣${count}'
 renamed = '»${count}'

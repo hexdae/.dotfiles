@@ -8,13 +8,23 @@ git pull origin master;
 
 function setup() {
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        source install/linux.sh
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        source install/osx.sh
-    else
-        echo "OS not supported"
+    # Install homebrew if needed
+    which -s brew
+    if [[ $? != 0 ]] ; then
+        # Install Homebrew
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+
+    # Install all packages
+    for package in $(cat $DOTFILES/install/packages);
+    do
+        which -s $package
+        if [[ $? != 0 ]] ; then
+            brew install $package;
+        else
+            echo "[INFO] $package already installed"
+        fi
+    done
 
     pushd user > /dev/null || exit 1
 
@@ -36,7 +46,7 @@ function setup() {
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    doIt;
+    setup;
 else
     read -p "This may rename existing files in your home directory. Are you sure? (y/n) " -n 1;
     echo "";
