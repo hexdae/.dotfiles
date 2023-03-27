@@ -17,3 +17,7 @@ font:
   bold_italic:
     family: "Hack"
     style: Bold Italic
+
+window:
+  opacity: 0.92
+  decorations: "Transparent"
