@@ -26,6 +26,9 @@ function setup() {
         fi
     done
 
+    # Install hack font
+    brew install --cask font-hack
+
     pushd user > /dev/null || exit 1
 
     for dotfile in .*; do
