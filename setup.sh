@@ -16,7 +16,7 @@ function setup() {
     fi
 
     # Install all packages
-    pushd brew > /dev/null && brew bundle install && popd > /dev/null || exit 1
+    brew bundle install --file brew/Brewfile
 
     pushd user > /dev/null || exit 1
 
