@@ -1,0 +1,38 @@
+[user]
+    name = d-asnaghi
+    email = 30296575+hexdae@users.noreply.github.com
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+
+[fetch]
+    prune = true
+
+[alias]
+    s = "status --porcelain"
+    ca = "commit --amend --no-edit"
+    sp = "stash push --include-untracked"
+    fix = "commit --amend --no-verify"
+    gone = "! git branch -vv | grep ': gone]' |  grep -v "\\*" | awk '{ print $1; }'"
+    local = "! git branch -vv | grep -v "$(git remote)" | awk '{ print $1; }'"
+    logline = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    tracked = "! git branch -vv | grep "$(git remote)" | awk '{ print $1; }'"
+    clean-branches = "! git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
+    find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+    show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+
+[init]
+    defaultBranch = main
+
+[core]
+	excludesfile = ~/.gitignore
+
+[pull]
+    ff = only

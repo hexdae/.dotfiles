@@ -1,6 +1,7 @@
 # Compiled Python files
 *.pyc
-__pycache__
+__pycache__/
+.venv/
 
 # Folder view configuration files
 .DS_Store
@@ -15,4 +16,6 @@ Thumbs.db
 .vscode
 
 # Personal single files to ignore
-hex-ignore-*
+.ignore*
+git_ignore*
+bazel-*

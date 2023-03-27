@@ -1,0 +1,18 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin "status-bar"
+        }
+    }
+
+    tab name="editor" focus=true {
+        pane borderless=true
+    }
+
+    tab name="terminal" {
+        pane
+        pane
+        pane size="20%"
+    }
+}

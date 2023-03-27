@@ -2,6 +2,6 @@
 source ~/.aliases
 source ~/.functions
 
-# PATH settings 
+# PATH settings
 export PATH="$HOME/bin:$PATH"
-
+source "$HOME/.cargo/env"
