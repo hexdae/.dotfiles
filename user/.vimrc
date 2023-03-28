@@ -1,56 +1,27 @@
-" :W sudo saves the file when the file is open in readonly mode
+" Commands
 command W w !sudo tee % > /dev/null
 
-""""""""""""""""""""""""""""""""""""
-" Line
-""""""""""""""""""""""""""""""""""""
-" show line numbers
-set number
-
-"""""""""""""""""""""""""""""""""""""
-" Indents
-"""""""""""""""""""""""""""""""""""""
-" replace tabs with spaces
-set expandtab
-" 1 tab = 2 spaces
-set tabstop=2 shiftwidth=2
-
-" when deleting whitespace at the beginning of a line, delete
-" 1 tab worth of spaces (for us this is 2 spaces)
-set smarttab
-
-" when creating a new line, copy the indentation from the line above
-set autoindent
-
-"""""""""""""""""""""""""""""""""""""
-" Search
-"""""""""""""""""""""""""""""""""""""
-" Ignore case when searching
-set ignorecase
-set smartcase
-
-" highlight search results (after pressing Enter)
+" Options
+set noswapfile              " remove swap file
+set number                  " line numbers
+set expandtab               " spaces for tab
+set tabstop=2 shiftwidth=2  " 1 tab = 2 spaces
+set smarttab                " smart tabs
+set autoindent              " python like indent
+set ignorecase              " ignore case in search
+set smartcase               " smart case in search
 set hlsearch
-
-" highlight all pattern matches WHILE typing the pattern
 set incsearch
-
-"""""""""""""""""""""""""""""""""""""
-" Mix
-"""""""""""""""""""""""""""""""""""""
-" show the mathing brackets
 set showmatch
 
-" highlight current line
-set cursorline
-
-"""""""""""""""""""""""""""""""""""""
-" Colorscheme
-"""""""""""""""""""""""""""""""""""""
+" Theme
 syntax on
+hi CursorLine term=bold cterm=bold
+hi Normal guibg=NONE ctermbg=NONE
 
-
+" Plugins
 call plug#begin()
   Plug 'preservim/NERDTree'
   let NERDTreeShowHidden=1
+  autocmd VimEnter * NERDTree
 call plug#end()
