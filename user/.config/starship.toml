@@ -19,7 +19,7 @@ disabled = true
 disabled = true
 
 [conda]
-disabled = true
+format = 'via [$symbol]($style) '
 
 [aws]
 disabled = true
