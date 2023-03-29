@@ -1,19 +1,12 @@
 #!/usr/bin/env bash
 
-set -eu pipefail
-
-DOTFILES=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+set -eu
 
 function setup() {
+    DOTFILES=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-    # Install homebrew if needed
-    which brew > /dev/null
-    if [[ $? != 0 ]] ; then
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    fi
-
-    # Install all packages
-    brew bundle install --file "$DOTFILES/brew/Brewfile"
+    # Install required packages
+    $DOTFILES/packages/install.sh
 
     for USER_FILE in "$DOTFILES"/user/.*; do
 
@@ -21,7 +14,7 @@ function setup() {
 
         if [[ ! "$DOTFILE" =~ .DS_Store$|.git$|^.$|^..$ ]]; then
             # Backup the file if it is present
-            if [[ -f "$HOME/$DOTFILE" ]] || [[ -d "$HOME"/$DOTFILE ]] ;then
+            if [[ -f "$HOME/$DOTFILE" ]] || [[ -d "$HOME"/$DOTFILE ]]; then
                 # Remove backup symlink directories to avoid duplication
                 [[ -d "$HOME/$DOTFILE.backup" ]] && rm "$HOME/$DOTFILE.backup"
                 # Copy the current file to its backup
@@ -30,20 +23,16 @@ function setup() {
             fi
 
             # Create a symlink to the .dotfile in this folder
-            ln -snf "$USER_FILE" "$HOME/$DOTFILE";
-
-        fi;
+            ln -snf "$USER_FILE" "$HOME/$DOTFILE"
+        fi
     done
 
 }
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    setup;
-else
-    read -p "This may rename existing files in your home directory. Are you sure? (y/n) " -n 1;
-    echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        setup;
-        zsh;
-    fi;
-fi;
+if [ "${1:-' '}" != "--force" ]; then
+    echo '[INFO] This may rename existing files in your home directory.'
+    read -p '[INFO] press ENTER to contine'
+fi
+
+setup
+zsh
