@@ -15,4 +15,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: prompt
         run: |
-          ./setup --force
+          ./setup.sh --force
