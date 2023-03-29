@@ -10,11 +10,11 @@ darwin_package_manager() {
 }
 
 linux_package_manager() {
-    which sudo
+    which sudo > /dev/null
     if [[ $? != 0 ]]; then
-        apt-get -y install "$@"
+        apt-get -y "$@"
     else
-        sudo apt-get install "$@"
+        sudo apt-get -y "$@"
     fi
 }
 

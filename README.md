@@ -1,5 +1,13 @@
 # .dotfiles
 
+
+<p style="center">
+
+[![Linux](https://github.com/hexdae/.dotfiles/actions/workflows/linux.yml/badge.svg)](https://github.com/hexdae/.dotfiles/actions/workflows/linux.yml)
+[![MacOs](https://github.com/hexdae/.dotfiles/actions/workflows/mac.yml/badge.svg)](https://github.com/hexdae/.dotfiles/actions/workflows/mac.yml)
+
+</p>
+
 A repository containing common tools used for development
 
 ### Installation
