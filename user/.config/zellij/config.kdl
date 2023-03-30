@@ -1,3 +1,4 @@
 theme "vitesse"
 mouse_mode true
+pane_frames false
 default_layout "compact"

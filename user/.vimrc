@@ -23,5 +23,4 @@ hi Normal guibg=NONE ctermbg=NONE
 call plug#begin()
   Plug 'preservim/NERDTree'
   let NERDTreeShowHidden=1
-  autocmd VimEnter * NERDTree
 call plug#end()
