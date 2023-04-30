@@ -4,4 +4,4 @@ source ~/.functions
 
 # PATH settings
 export PATH="$HOME/bin:$PATH"
-source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
