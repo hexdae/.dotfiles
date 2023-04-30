@@ -3,9 +3,8 @@
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
  
-    sudo || true
-    add-apt-repository ppa:aslatter/ppa -y
-    MANAGER="apt-get -y"
+    sudo add-apt-repository ppa:aslatter/ppa -y
+    INSTALL="sudo apt-get -y install"
 
     
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -14,7 +13,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ $? != 0 ]]; then
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
-    MANAGER="brew"
+    INSTALL="brew install"
 
 else
     echo "OS not supported"
@@ -23,4 +22,4 @@ fi
 
 
 PACKAGES="zsh wget vim starship helix zellij alacritty"
-$MANAGER install $PACKAGES
+$INSTALL $PACKAGES
