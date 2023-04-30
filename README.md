@@ -11,5 +11,5 @@ A repository containing common tools used for development, compatible with mac a
 
 ### Installation
 
-`sh <(curl https://github.com/hexdae/dotfiles/install.sh)`
+`sh <(curl https://raw.githubusercontent.com/hexdae/.dotfiles/curl-install/install.sh)`
 
