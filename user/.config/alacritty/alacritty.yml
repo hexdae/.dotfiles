@@ -19,6 +19,7 @@ font:
     style: Bold Italic
 
 window:
+  option_as_alt: Both
   opacity: 0.92
   decorations: "transparent"
   padding:

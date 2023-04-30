@@ -13,6 +13,7 @@ set smartcase               " smart case in search
 set hlsearch
 set incsearch
 set showmatch
+set backspace=2
 
 " Theme
 syntax on

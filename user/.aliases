@@ -1,1 +1,2 @@
 alias c="clear"
+alias vim="hx -c $HOME/.config/helix/config.vim.toml"

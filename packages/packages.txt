@@ -1,6 +1,0 @@
-zsh
-wget
-vim
-zellij
-starship
-alacritty
