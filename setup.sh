@@ -2,11 +2,28 @@
 
 set -eu
 
-function setup() {
-    DOTFILES=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+function install() {
 
-    # Install required packages
-    $DOTFILES/packages/install.sh
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then        
+        sudo add-apt-repository ppa:aslatter/ppa -y
+        INSTALL="sudo apt-get -y install"
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        which brew > /dev/null || bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        INSTALL="brew install"
+    else
+        echo "OS not supported"
+        exit 1
+    fi
+
+    $INSTALL $@
+}
+
+function setup() {
+
+    # Install required packges
+    install zsh wget vim starship helix zellij alacritty
+
+    DOTFILES=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
     for USER_FILE in "$DOTFILES"/user/.*; do
 
