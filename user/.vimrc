@@ -20,8 +20,3 @@ syntax on
 hi CursorLine term=bold cterm=bold
 hi Normal guibg=NONE ctermbg=NONE
 
-" Plugins
-call plug#begin()
-  Plug 'preservim/NERDTree'
-  let NERDTreeShowHidden=1
-call plug#end()
