@@ -1,39 +1,26 @@
 #!/usr/bin/env bash
 
 
-darwin_package_manager() {
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+ 
+    sudo || true
+    add-apt-repository ppa:aslatter/ppa -y
+    MANAGER="apt-get -y"
+
+    
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    
     which brew > /dev/null
     if [[ $? != 0 ]]; then
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
-    brew "$@"
-}
+    MANAGER="brew"
 
-linux_package_manager() {
-    which sudo > /dev/null
-    if [[ $? != 0 ]]; then
-        apt-get -y "$@"
-    else
-        sudo apt-get -y "$@"
-    fi
-}
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    MANAGER=linux_package_manager
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    MANAGER=darwin_package_manager
 else
     echo "OS not supported"
     exit 1
 fi
 
-PACKAGES=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-for package in $(cat $PACKAGES/packages.txt); do
-    which $package > /dev/null
-    if [[ $? != 0 ]]; then
-        $MANAGER install $package $OPTIONS
-    else
-        echo "[INFO] $package already installed"
-    fi
-done
+PACKAGES="zsh wget vim starship helix zellij alacritty"
+$MANAGER install $PACKAGES

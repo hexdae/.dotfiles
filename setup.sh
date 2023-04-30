@@ -13,10 +13,13 @@ function setup() {
         local DOTFILE="$(basename $USER_FILE)"
 
         if [[ ! "$DOTFILE" =~ .DS_Store$|.git$|^.$|^..$ ]]; then
+
             # Backup the file if it is present
             if [[ -f "$HOME/$DOTFILE" ]] || [[ -d "$HOME"/$DOTFILE ]]; then
+                
                 # Remove backup symlink directories to avoid duplication
                 [[ -d "$HOME/$DOTFILE.backup" ]] && rm "$HOME/$DOTFILE.backup"
+                
                 # Copy the current file to its backup
                 echo "[INFO] backing up original $DOTFILE"
                 mv "$HOME/$DOTFILE" "$HOME/$DOTFILE.backup"
