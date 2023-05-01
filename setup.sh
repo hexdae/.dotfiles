@@ -20,7 +20,7 @@ function install() {
     $INSTALL zsh wget vim helix alacritty
     
     # Staship install
-    sh <(curl -sS https://starship.rs/install.sh) -y
+    which starship > /dev/null || sh <(curl -sS https://starship.rs/install.sh) -y
 }
 
 function setup() {
