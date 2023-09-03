@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+set -eu
+
+mkboot_macos() {
+	
+	local ISO="$1"
+	local DISK="$2"
+	
+	local IMG="/tmp/$(basename $ISO).img"
+	hdiutil convert -format UDRW -o $IMG $ISO
+	diskutil unmountDisk $DISK
+	echo time sudo dd if=$IMG.dmg of=$DISK bs=1m
+}
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	mkboot_macos $1 $2
+else
+    echo "OS not supported"
+	exit 1
+fi
+
