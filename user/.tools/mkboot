@@ -13,6 +13,18 @@ mkboot_macos() {
 	echo time sudo dd if=$IMG.dmg of=$DISK bs=1m
 }
 
+HELP="mkboot <image.iso> <disk>"
+
+if [ $# -eq 0  ] 
+	then
+	    echo $HELP 
+		exit 1
+elif [ "$1" == "-h" ]
+  then
+    echo $HELP
+		exit 1
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	mkboot_macos $1 $2
 else
