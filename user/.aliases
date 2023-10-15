@@ -1,5 +1,4 @@
 alias c="clear"
-alias vim="hx -c $HOME/.config/helix/config.vim.toml"
 alias bb="bazel build"
 alias br="bazel run"
 alias bt="bazel test"

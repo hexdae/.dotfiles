@@ -20,3 +20,8 @@ watch-sync() { fswatch $1 -o -r | xargs -n1 -I{} rsync -av $1 $2; }
 # Utilities
 b64() { echo $1 | base64 --decode }
 h() { local line="${2:-1}p"; history 0 | cut -c 8- | rg -v "h " | rg $1 | tac | sed -n $line; }
+
+# Bazel
+bzlmod_sha256() {
+   wget -nv -O - $1 | openssl dgst -sha256 -binary | openssl base64 -A | sed 's/^/sha256-/'
+}

@@ -3,10 +3,8 @@
 set -eu
 
 mkboot_macos() {
-	
 	local ISO="$1"
 	local DISK="$2"
-	
 	local IMG="/tmp/$(basename $ISO).img"
 	hdiutil convert -format UDRW -o $IMG $ISO
 	diskutil unmountDisk $DISK
