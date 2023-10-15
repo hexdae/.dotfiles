@@ -5,7 +5,6 @@ set -eu
 function install() {
 
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then        
-        sudo add-apt-repository -y ppa:maveonair/helix-editor
         sudo add-apt-repository -y ppa:aslatter/ppa
         INSTALL="sudo apt-get -y install"
     elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -17,10 +16,13 @@ function install() {
     fi
 
     # Install packages
-    $INSTALL zsh wget vim helix alacritty
+    $INSTALL zsh wget vim
+    
+    # Make bin dir
+    mkdir -p $HOME/bin
     
     # Staship install
-    which starship > /dev/null || sh <(curl -sS https://starship.rs/install.sh) -y
+    which starship > /dev/null || sh <(curl -sS https://starship.rs/install.sh) -y --bin-dir $HOME/bin
 }
 
 function setup() {
