@@ -1,3 +1,8 @@
+-- Remove warning about transparent_background
+require("notify").setup({
+  background_colour = "#000000",
+})
+
 return {
   -- add theme
   {
