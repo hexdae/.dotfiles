@@ -1,8 +1,15 @@
 import:
- - ~/.config/alacritty/themes/github.yaml
+  - ~/.config/alacritty/themes/github.yaml
 
 env:
   TERM: alacritty
+
+bindings:
+  - { key: K, mods: Command, chars: "\x08K" }
+
+key_bindings:
+  - { key: Left, mods: ALT, chars: "\x1bb" }
+  - { key: Right, mods: ALT, chars: "\x1bf" }
 
 font:
   normal:
@@ -23,9 +30,5 @@ window:
   opacity: 0.92
   decorations: "transparent"
   padding:
-   x: 20
-   y: 30
-
-
-
-
+    x: 20
+    y: 30
