@@ -16,7 +16,7 @@ disabled = true
 [rust]
 disabled = true
 
-[python]
+[swift]
 disabled = true
 
 [conda]
