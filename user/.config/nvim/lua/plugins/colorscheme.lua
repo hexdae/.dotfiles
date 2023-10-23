@@ -1,8 +1,3 @@
--- Remove warnings for transparent background
-require("notify").setup({
-  background_colour = "#000000",
-})
-
 return {
   -- Set up transparent background
   {
