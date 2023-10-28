@@ -27,7 +27,7 @@ font:
 
 window:
   option_as_alt: Both
-  opacity: 0.92
+  opacity: 0.95
   decorations: "transparent"
   padding:
     x: 20
