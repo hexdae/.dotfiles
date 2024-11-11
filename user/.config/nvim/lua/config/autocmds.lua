@@ -5,5 +5,5 @@
 -- Setup transparent background for neo-tree
 require("transparent").clear_prefix("NeoTree")
 
--- Fix notifications about transparent background
+-- Fix notifications about transparent background_colour
 require("notify").setup({ background_colour = "#000000" })

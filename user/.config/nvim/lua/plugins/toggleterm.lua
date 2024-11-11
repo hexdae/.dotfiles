@@ -41,6 +41,11 @@ return {
         desc = "Select term",
       },
       {
+        "<D-j>",
+        "<cmd>ToggleTerm<cr>",
+        desc = "Toggle last opened terminal with last orientation",
+      },
+      {
         "<leader>tt",
         function()
           require("toggleterm").toggle(1, 100, Util.root.get(), "tab")
@@ -72,7 +77,7 @@ return {
       -- on_exit = fun(t: Terminal, job: number, exit_code: number, name: string) -- function to run when terminal process exits
       hide_numbers = true, -- hide the number column in toggleterm buffers
       shade_filetypes = {},
-      shade_terminals = true,
+      shade_terminals = false,
       -- shading_factor = '<number>', -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
       start_in_insert = true,
       insert_mappings = true, -- whether or not the open mapping applies in insert mode
