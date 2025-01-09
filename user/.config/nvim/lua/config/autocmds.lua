@@ -5,9 +5,6 @@
 -- Setup transparent background for neo-tree
 require("transparent").clear_prefix("NeoTree")
 
--- Fix notifications about transparent background_colour
-require("notify").setup({ background_colour = "#000000" })
-
 -- Set filetype for .ato files to python
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.ato",
