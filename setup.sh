@@ -14,10 +14,10 @@ function install() {
         echo "OS not supported"
         exit 1
     fi
-
-    # Install packages
-    $INSTALL zsh wget vim nushell
     
+    # Install packages
+    $INSTALL zsh wget vim cyme bat ripgrep
+
     # Make bin dir
     mkdir -p $HOME/bin
     
