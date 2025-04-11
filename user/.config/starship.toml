@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 [git_status]
 modified = '[!${count}](bold yellow)'
 deleted = '[✘${count}](bold red)'
@@ -9,6 +11,9 @@ stashed = '*${count}'
 untracked = '[?${count}](bold blue)'
 diverged = '⇡${ahead_count}⇣${behind_count}'
 conflicted = "≠${count}"
+
+[shell]
+disabled = false
 
 [line_break]
 disabled = true
