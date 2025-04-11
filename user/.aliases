@@ -1,4 +1,5 @@
 alias c="clear"
-alias bb="bazel build"
-alias br="bazel run"
-alias bt="bazel test"
+alias nu="nu --config ~/.config/nushell/config.nu"
+alias lsusb="cyme"
+alias grep="rg"
+alias cat="bat -p --theme ansi"

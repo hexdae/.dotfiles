@@ -16,7 +16,7 @@ function install() {
     fi
 
     # Install packages
-    $INSTALL zsh wget vim
+    $INSTALL zsh wget vim nushell
     
     # Make bin dir
     mkdir -p $HOME/bin
