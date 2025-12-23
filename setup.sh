@@ -15,8 +15,10 @@ function install() {
         exit 1
     fi
     
-    # Install packages
-    $INSTALL zsh wget vim cyme bat ripgrep
+    # Install packages, allowing graceful failure for each
+    for pkg in zsh wget vim bat cyme ripgrep gh; do
+        $INSTALL $pkg || echo "[WARN] Failed to install $pkg, continuing..."
+    done
 
     # Make bin dir
     mkdir -p $HOME/bin
