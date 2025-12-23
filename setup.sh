@@ -16,7 +16,7 @@ function install() {
     fi
     
     # Install packages, allowing graceful failure for each
-    for pkg in zsh wget vim bat cyme ripgrep gh; do
+    for pkg in zsh wget vim bat cyme ripgrep gh fzf; do
         $INSTALL $pkg || echo "[WARN] Failed to install $pkg, continuing..."
     done
 
