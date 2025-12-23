@@ -3,7 +3,7 @@ alias_if_exists() {
   command -v "$1" >/dev/null 2>&1 && alias "$2"="$3"
 }
 
-alias_if_exists c="clear"
+alias_if_exists clear c "clear"
 alias_if_exists cyme lsusb "cyme"
 alias_if_exists rg grep "rg"
 alias_if_exists eza ls "eza"
