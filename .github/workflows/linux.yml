@@ -8,13 +8,26 @@ on:
 
 jobs:
 
-  linux:
-    name: Build
+  ubuntu:
+    name: Build (Ubuntu)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: prompt
         run: |
           sudo apt-get update
-          sudo apt-get upgrade
+          sudo apt-get upgrade -y
+          bash ./setup.sh --force
+
+  fedora:
+    name: Build (Fedora)
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - name: prerequisites
+        run: |
+          dnf -y install git sudo util-linux which
+      - uses: actions/checkout@v4
+      - name: prompt
+        run: |
           bash ./setup.sh --force

@@ -4,9 +4,21 @@ set -eu
 
 function install() {
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then        
-        sudo add-apt-repository -y ppa:aslatter/ppa
-        INSTALL="sudo apt-get -y install"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        if command -v apt-get >/dev/null 2>&1; then
+            # Debian / Ubuntu
+            sudo add-apt-repository -y ppa:aslatter/ppa || echo "[WARN] could not add aslatter PPA, continuing..."
+            INSTALL="sudo apt-get -y install"
+        elif command -v dnf >/dev/null 2>&1; then
+            # Fedora / RHEL / Amazon Linux 2023
+            INSTALL="sudo dnf -y install"
+        elif command -v yum >/dev/null 2>&1; then
+            # Older RHEL / CentOS
+            INSTALL="sudo yum -y install"
+        else
+            echo "[ERROR] No supported package manager found (apt-get, dnf, yum)"
+            exit 1
+        fi
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         which brew > /dev/null || bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         INSTALL="brew install"
@@ -14,9 +26,11 @@ function install() {
         echo "OS not supported"
         exit 1
     fi
-    
-    # Install packages, allowing graceful failure for each
-    for pkg in zsh wget vim bat cyme ripgrep gh fzf; do
+
+    # Install packages, allowing graceful failure for each.
+    # cyme isn't packaged on most distros — falls through to the warning and
+    # can be installed later via `cargo install cyme` if desired.
+    for pkg in zsh wget vim bat ripgrep gh fzf cyme; do
         $INSTALL $pkg || echo "[WARN] Failed to install $pkg, continuing..."
     done
 
