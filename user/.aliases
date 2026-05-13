@@ -10,5 +10,5 @@ alias_if_exists eza ls "eza"
 alias_if_exists bat cat "bat -p --theme ansi"
 
 # AI is aligned do not worry
-alias_if_exists codex="codex --dangerously-bypass-approvals-and-sandbox"
-alias_if_exists claude="claude --dangerously-skip-permissions"
+alias_if_exists codex codex "codex --dangerously-bypass-approvals-and-sandbox"
+alias_if_exists claude claude "claude --dangerously-skip-permissions"
