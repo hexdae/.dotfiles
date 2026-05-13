@@ -16,7 +16,6 @@ jobs:
       - name: prompt
         run: |
           sudo apt-get update
-          sudo apt-get upgrade -y
           bash ./setup.sh --force
 
   fedora:
