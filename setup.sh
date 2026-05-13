@@ -41,10 +41,47 @@ function install() {
     which starship > /dev/null || sh <(curl -sS https://starship.rs/install.sh) -y --bin-dir $HOME/bin
 }
 
+function set_default_shell() {
+
+    local ZSH_PATH
+    ZSH_PATH="$(command -v zsh || true)"
+    if [[ -z "$ZSH_PATH" ]]; then
+        echo "[WARN] zsh not installed, skipping default shell change"
+        return
+    fi
+
+    # Ensure zsh is registered in /etc/shells (required by chsh on most distros)
+    if [[ -w /etc/shells ]] || sudo -n true 2>/dev/null; then
+        if ! grep -qx "$ZSH_PATH" /etc/shells 2>/dev/null; then
+            echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null || true
+        fi
+    fi
+
+    local CURRENT_SHELL
+    CURRENT_SHELL="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
+    if [[ "$CURRENT_SHELL" == "$ZSH_PATH" ]]; then
+        return
+    fi
+
+    if command -v chsh >/dev/null 2>&1; then
+        chsh -s "$ZSH_PATH" "$USER" 2>/dev/null \
+            || sudo chsh -s "$ZSH_PATH" "$USER" \
+            || echo "[WARN] could not change default shell to $ZSH_PATH"
+    elif command -v usermod >/dev/null 2>&1; then
+        sudo usermod -s "$ZSH_PATH" "$USER" \
+            || echo "[WARN] could not change default shell to $ZSH_PATH"
+    else
+        echo "[WARN] neither chsh nor usermod available; default shell unchanged"
+    fi
+}
+
 function setup() {
 
     # Install required packges
     install
+
+    # Make zsh the login shell
+    set_default_shell
 
     DOTFILES=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
